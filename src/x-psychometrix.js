@@ -73,6 +73,18 @@ window.onload = () => {
                     Array.from(sorted[sorted.length - 1].childNodes).filter((cell) => cell.nodeName.toLowerCase() === "td")[1].innerHTML = 1
                 }
 
+                if (window.location.href.includes("x.psychometrix.co.il/learning-systems/words")) {
+                    const words = Array.from(document.getElementById("spn_words").childNodes).map((word) => {
+                        const classes = Array.from(word.classList)
+                        return {
+                            word: word.querySelector("div.word").textContent,
+                            meaning: word.querySelector("div.meaning").textContent,
+                            status: classes.includes("status-y") ? 1 : (classes.includes("status-n") ? -1 : (classes.includes("status-m") ? 0 : null))
+                        }
+                    })
+                    console.log(words)
+                }
+
                 document.querySelectorAll("a").forEach((a) => a.title = "")
                 const instructions = document.querySelector(".chrome-instructions")
                 if (instructions) {
